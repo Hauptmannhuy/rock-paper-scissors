@@ -1,79 +1,57 @@
 
 
-const computerSelection = getComputerChoice();
-const playerSelection = prompt("Make your choice!").toLowerCase();
-let playerWin = `You win! ${playerSelection} beats ${computerSelection}`;
-let computerWin = `You lose! ${computerSelection} beats ${playerSelection}`;
-let tie = "That's a tie";
 
+/* 
+Make function input for user
+Make function value randomizer
+Make function that reproduce one game round
+Make function that reproduce whole game
+*/
 
-
-function getComputerChoice(){
-   let number = Math.floor(Math.random()*3);
-   if (number === 0){
-    return "rock";
-   }
-   else if (number === 1){
-    return "paper";
-   }
-   else if (number === 2){
-    return "scissors";
-   }
-}
-
-function oneRound(playerSelection, computerSelection){
-   
+function randomizer(){                              //randomizer for random values
     
-    if (playerSelection === 'rock' && computerSelection === 'scissors'){
-        return playerWin;
+    let number = Math.floor(Math.random()*3);
+    console.log(number) 
+    if (number === 0){
+        return 'rock';
+       
     }
-    else if (playerSelection === 'scissors' && computerSelection === 'paper'){
-       return playerWin;
+    else if (number === 1){
+        return 'paper';
+       
     }
-    else if (playerSelection === "paper" && computerSelection === "rock"){
-        return playerWin;
-    }
-    else if (playerSelection === computerSelection){
-        return tie;
-    }
-    else {
-        return computerWin;
-    }
-}
-
-function game(){
-   let playerScore = 0;
-   let computerScore = 0;
-  
-   for (let i = 0; i < 5; i++){
-    const playerSelection = prompt("Make your choice!").toLowerCase();
-    const computerSelection = getComputerChoice();
-    const roundResult = oneRound(playerSelection, computerSelection);
-    if (roundResult === playerWin){
-        playerScore++;
-        alert(playerWin);
-    }
-    else if (roundResult === computerWin){
-        computerScore++;
-        alert(computerWin)
-    }
+    else if (number === 2) {
+        return 'scissors'
    
-    
-   }
-   if (playerScore>computerScore){
-    alert("You win!")
-   }
-   else if (computerScore>playerScore) {
-    alert("You lose!")
-   }
-   else {
-    alert("It's a tie game!")
-   }
-   console.log(playerScore,computerScore);
+    }
 }
 
+   
+    function oneRound(userInput,computerInput){
+        const computerWin = `You lose! ${computerInput} beats ${userInput}`;
+        const playerWin = `You win! ${userInput} beats ${computerInput}`;
+        const tie = "That's a tie";
+        if (userInput === 'paper' && computerInput === 'rock'){
+            return playerWin;
+        }
+       else if (userInput === 'rock' && computerInput === 'scissors'){
+            return playerWin;
+        }
+        else if (userInput === 'scissors' && computerInput === 'paper'){
+            return playerWin;
+        }
+        else if (userInput === computerInput){
+            return tie;
+        }
+        else {
+            return computerWin
+        }
+    }
 
-game()
+    const userInput = window.prompt().toLowerCase();
+    const computerInput = randomizer();
+    console.log(oneRound(userInput,computerInput))
+
 
 
 
