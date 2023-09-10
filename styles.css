@@ -1,0 +1,12 @@
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px;
+}

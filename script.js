@@ -1,14 +1,49 @@
+let computerSelection = null;
+let clickCounter = 0;
+let playerScore = 0;
+let computerScore = 0;
+let playerSelection = null;
+const playerPoints = document.querySelector('#player-score');
+const computerPoints = document.querySelector('#computer-score');
+
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button)=> {
+    function startGame(){
+         button.addEventListener('click', (e) => {
+        
+         selector(e);
+         computerSelection = randomizer();
+        playRound(playerSelection,computerSelection)
+        playerPoints.textContent = `Player score:${playerScore}`;
+        computerPoints.textContent = `Computer score:${computerScore}`;
+        clickCounter++;
+        endCondition(clickCounter)
+      
+    });
+    }
+   startGame();
+});
 
 
+function endCondition(clickCounter){
+    if (clickCounter === 5){
+        alert(`Game is over! The winner is ${playerScore > computerScore ? 'Player!': 'Computer!'}`)
+    }
+}
 
-/* 
-Make function input for user
-Make function value randomizer
-Make function that reproduce one game round
-Make function that reproduce whole game
-*/
+function selector(e){
+    if (e.target.id === 'rock'){
+        playerSelection = 'rock'
+    }
+    else if (e.target.id === 'paper'){
+        playerSelection = 'paper'
+    }
+    else if (e.target.id === 'scissors'){
+        playerSelection = 'scissors'
+    }
+}
 
-function randomizer(){                              //randomizer for random values
+function randomizer(){                          
     
     let number = Math.floor(Math.random()*3);
    
@@ -25,62 +60,31 @@ function randomizer(){                              //randomizer for random valu
    
     }
 }
-let computerInput = randomizer();
-let computerSelection = computerInput;
-let playerSelection = window.prompt().toLowerCase();
-//let computerWin = `You lose! ${computerSelection} beats ${playerSelection}`;
-//let playerWin = `You win! ${playerSelection} beats ${computerSelection}`;
-//let tie = "That's a tie";
-    function oneRound(playerSelection,computerSelection){
+
+
+    function playRound(playerSelection,computerSelection){
        
         if (playerSelection === 'paper' && computerSelection === 'rock'){
-            return 'Player win';
+             playerScore++;
         }
        else if (playerSelection === 'rock' && computerSelection === 'scissors'){
-            return 'Player win';
+             playerScore++;
         }
         else if (playerSelection === 'scissors' && computerSelection === 'paper'){
-            return 'Player win';
+             playerScore++;
         }
         else if (playerSelection === computerSelection){
-            return "That's a tie";
+            console.log("That's a tie")
         }
         else {
-            return 'Computer win'
+             computerScore++;
         }
     }
     
     
   
    
-    function game(){
-       
-        let playerScore = 0;
-        let computerScore = 0;
-        for (let i = 0; i < 5; i++){
-            const playerSelection = window.prompt().toLowerCase();
-            const computerSelection = randomizer();
-            let roundResult = oneRound(playerSelection, computerSelection);
-            if (roundResult === 'Player win'){
-                playerScore++
-            }
-            else if (roundResult === 'Computer win'){
-                computerScore++
-            }
-            console.log(playerScore,computerScore);
-        }
-        if (playerScore > computerScore){
-            alert("You win!");
-        }
-        else if (computerScore > playerScore){
-            alert("You lose");
-        }
-        else if (computerScore === playerScore) {
-            alert ("That's a tie!");
-        }
-    }
 
-game();
 
 
 
